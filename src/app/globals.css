@@ -51,6 +51,66 @@ header.site-header {
   color: var(--color-primary);
 }
 
+/* ===== APEX SPORTS PSYCHOLOGY NAVBAR ===== */
+
+header.site-header.apex-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.96),
+    rgba(0, 0, 0, 0.9),
+    rgba(0, 0, 0, 0.85)
+  );
+  color: #ffffff;
+}
+
+/* Logo text */
+.apex-logo span {
+  font-family: inherit;
+  letter-spacing: 0.28em;
+}
+
+/* Gold diamond next to logo */
+.apex-logo-diamond {
+  width: 14px;
+  height: 14px;
+  background: #f4c44b;
+  transform: rotate(45deg);
+  border-radius: 2px;
+}
+
+/* Center nav links */
+.apex-nav-link {
+  color: #ffffff;
+  letter-spacing: 0.28em;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+/* Right-side login pill */
+.apex-login-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: #f4c44b;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.apex-login-avatar svg {
+  fill: #000000;
+}
+
+.apex-login-text {
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  color: #d8aa2c;
+}
+
 /* Hero */
 .hero {
   padding: 6rem 0;
