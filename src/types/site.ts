@@ -8,13 +8,16 @@ export type Hero = {
 };
 
 export type ProgramItem = {
+  id: string;
   name: string;
   image?: string;
+  price?: string;
   slug?: string;
   description?: string;
   details?: string[];
   duration?: string;
   frequency?: string;
+  level?: string;
 };
 
 export type Section = {

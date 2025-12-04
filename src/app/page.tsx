@@ -1,293 +1,257 @@
-"use client";
-
+import Hero from "@/components/Hero";
+import ProgramCard from "@/components/ProgramCard";
+import { ProgramItem } from "@/types/site";
 import Link from "next/link";
-import Image from "next/image";
 
 export default function HomePage() {
+  // Sample program data - replace with real data from your API/database
+  const programs: ProgramItem[] = [
+    {
+      id: "1",
+      name: "Large Group / Team Training",
+      slug: "team-training",
+      description:
+        "Dynamic, high-energy sessions perfect for team environments. Emphasizes competition, teamwork, and athletic performance.",
+      image: "/images/hero.jpg",
+      price: "40",
+      duration: "60 min",
+      level: "6 Athletes",
+    },
+    {
+      id: "2",
+      name: "Small Group Training",
+      slug: "small-group",
+      description:
+        "Focused coaching in a semi-private setting. Skill-specific feedback and drills ideal for athletes looking to refine technique.",
+      image: "/images/hero.jpg",
+      price: "60",
+      duration: "60 min",
+      level: "2-6 Athletes",
+    },
+    {
+      id: "3",
+      name: "Private 1-on-1 Training",
+      slug: "private-training",
+      description:
+        "Customized performance plan. Direct coaching and progress tracking tailored to the athlete's sport, goals, and level.",
+      image: "/images/hero.jpg",
+      price: "75",
+      duration: "60 min",
+      level: "1-on-1",
+    },
+  ];
+
+  const developmentAreas = [
+    "Explosiveness & Acceleration",
+    "Agility, Change of Direction & Footwork",
+    "Strength & Power Output",
+    "Core Stability & Balance",
+    "Conditioning & Endurance",
+    "Injury Prevention & Recovery Habits",
+  ];
+
+  const sports = [
+    "Baseball",
+    "Basketball",
+    "Football",
+    "Volleyball",
+    "Track & Field",
+    "And more...",
+  ];
+
   return (
     <>
-      {/* HERO */}
-      <section className="apex-hero relative overflow-hidden bg-black text-white">
-        {/* Background image + overlay */}
-        <div className="apex-hero-bg">
-          <Image
-            src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1600&q=80"
-            alt="Athletes training"
-            className="apex-hero-bg-img object-cover"
-            fill
-            priority
-            sizes="(max-width: 768px) 100vw, 1600px"
-          />
-          <div className="apex-hero-overlay" />
-        </div>
+      {/* Hero Section */}
+      <Hero />
 
-        <div className="relative z-10">
-          <div className="container">
-            <div className="max-w-xl py-24 md:py-32">
-              <h1 className="fade-up fade-up-1 text-3xl md:text-5xl lg:text-6xl font-extrabold leading-tight tracking-[0.05em]">
-                MAXIMIZE YOUR FULL
-                <br />
-                <span className="text-apex-gold">POTENTIAL.</span>
-              </h1>
-              <p className="fade-up fade-up-2 mt-6 max-w-md text-sm md:text-base text-white/80">
-                Mental and performance training for athletes and coaches.
+      {/* Programs Section */}
+      <section id="programs" className="section bg-white">
+        <div className="container">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <h2 className="text-heading-1 mb-4">
+              Our <span className="text-lime">Training</span> Programs
+            </h2>
+            <p className="text-lg text-slate-600">
+              Choose the training format that fits your goals. All programs are
+              designed around sport demands and position-specific movements.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {programs.map((program) => (
+              <ProgramCard key={program.id} item={program} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* About/Philosophy Section */}
+      <section className="section bg-slate-900 text-white">
+        <div className="container">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Text Content */}
+            <div className="space-y-6">
+              <div>
+                <span className="text-xs uppercase tracking-widest font-semibold text-lime-400">
+                  Our Training Philosophy
+                </span>
+                <h2 className="text-heading-1 mt-3 mb-4">
+                  What Sets <span className="text-lime">C.O.R.E.</span> Athlete
+                  Apart
+                </h2>
+              </div>
+
+              <p className="text-lg text-white/90 leading-relaxed">
+                <span className="text-lime-400 font-bold">C.O.R.E.</span> ={" "}
+                <span className="font-semibold">
+                  Creating. Opportunities. Realigning. Expectations.
+                </span>
               </p>
 
-              <div className="fade-up fade-up-3 mt-8 flex flex-wrap items-center gap-4">
-                <Link
-                  href="/#contact"
-                  className="inline-flex items-center rounded-full bg-apex-gold px-8 py-3 text-xs md:text-sm font-semibold tracking-[0.18em] uppercase text-black shadow-md hover:bg-[#ffd15c] transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-xl"
-                >
-                  Book Now
+              <div className="space-y-4 text-white/80">
+                <p className="leading-relaxed">
+                  Focused on long-term athletic development, our training is
+                  built around sport demands and position-specific movements.
+                </p>
+                <p className="leading-relaxed">
+                  We enhance confidence, resilience, and game performance
+                  through proven results from elite-level training, experienced
+                  multi-sport athlete leadership, and science-based programming.
+                </p>
+              </div>
+
+              <div className="pt-4">
+                <Link href="/about" className="btn btn-primary">
+                  Learn More About Us
                 </Link>
-                <Link
-                  href="#about"
-                  className="inline-flex items-center rounded-full border border-white/60 px-8 py-3 text-xs md:text-sm font-semibold tracking-[0.18em] uppercase text-white/90 hover:bg-white/10 transition-transform duration-200 hover:-translate-y-0.5"
-                >
-                  Learn More
-                </Link>
+              </div>
+            </div>
+
+            {/* Image or Stats */}
+            <div className="relative">
+              <div className="grid grid-cols-2 gap-6">
+                <div className="card-dark border border-lime-400/20 p-6">
+                  <div className="text-4xl font-bold text-lime-400 mb-2">
+                    500+
+                  </div>
+                  <div className="text-sm text-white/80 uppercase tracking-wide">
+                    Athletes Trained
+                  </div>
+                </div>
+                <div className="card-dark border border-lime-400/20 p-6">
+                  <div className="text-4xl font-bold text-lime-400 mb-2">
+                    95%
+                  </div>
+                  <div className="text-sm text-white/80 uppercase tracking-wide">
+                    Success Rate
+                  </div>
+                </div>
+                <div className="card-dark border border-lime-400/20 p-6">
+                  <div className="text-4xl font-bold text-lime-400 mb-2">
+                    10+
+                  </div>
+                  <div className="text-sm text-white/80 uppercase tracking-wide">
+                    Sports Covered
+                  </div>
+                </div>
+                <div className="card-dark border border-lime-400/20 p-6">
+                  <div className="text-4xl font-bold text-lime-400 mb-2">
+                    24/7
+                  </div>
+                  <div className="text-sm text-white/80 uppercase tracking-wide">
+                    Support Available
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ABOUT APEX */}
-      <section id="about" className="apex-about-section">
-        <div className="container py-16 md:py-24">
-          <div className="apex-about-layout">
-            {/* LEFT: Visual side */}
-            <div className="apex-about-visual about-anim-img">
-              <div className="apex-about-img-main">
-                <Image
-                  src="https://images.unsplash.com/photo-1534367507873-d2d7e24c797f?auto=format&fit=crop&w=1200&q=80"
-                  alt="Athlete focusing before competition"
-                  fill
-                  priority
-                  sizes="(max-width: 768px) 100vw, 1600px"
-                />
-              </div>
-
-              {/* small floating card like Wix accent */}
-              <div className="apex-about-tag">
-                <span className="apex-about-tag-label">Mindset</span>
-                <p className="apex-about-tag-text">
-                  Confidence, focus and resilience training for high-performing
-                  athletes.
-                </p>
-              </div>
+      {/* Athletic Development Areas */}
+      <section className="section bg-slate-50">
+        <div className="container">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Development Areas */}
+            <div>
+              <h2 className="text-heading-2 mb-6">
+                Athletic <span className="text-lime">Development</span> Areas
+              </h2>
+              <ul className="space-y-3">
+                {developmentAreas.map((area, index) => (
+                  <li key={index} className="flex items-start gap-3">
+                    <svg
+                      className="w-6 h-6 text-lime-400 shrink-0 mt-0.5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                    <span className="text-slate-700">{area}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
 
-            {/* RIGHT: Text panel */}
-            <div className="apex-about-panel about-anim-card">
-              <h2 className="apex-about-kicker">
-                About Apex Sports Psychology
+            {/* Sports We Train */}
+            <div>
+              <h2 className="text-heading-2 mb-6">
+                <span className="text-lime">Sports</span> We Train
               </h2>
-              <h3 className="apex-about-heading">
-                Sports psychology for peak performance.
-              </h3>
-              <p className="apex-about-body">
-                Apex Sports Psychology helps athletes, coaches and teams unlock
-                their mental edge. Through evidence-based strategies, we work on
-                confidence, focus and resilience so you can perform at your best
-                when it matters most.
-              </p>
-              <p className="apex-about-body">
-                Whether you&apos;re preparing for competition, returning from
-                injury or striving for the next level, our individualized
-                sessions and team workshops provide the tools you need to thrive
-                on and off the field.
-              </p>
-
-              <ul className="apex-about-list">
-                <li>1-on-1 sessions for athletes at every level</li>
-                <li>Mental skills training for teams &amp; coaches</li>
-                <li>Online programs and remote coaching options</li>
+              <ul className="space-y-3">
+                {sports.map((sport, index) => (
+                  <li key={index} className="flex items-start gap-3">
+                    <svg
+                      className="w-6 h-6 text-lime-400 shrink-0 mt-0.5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                    <span className="text-slate-700">{sport}</span>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
         </div>
       </section>
 
-      {/* SERVICES */}
-      <section id="services" className="bg-black text-white">
-        <div className="container py-16 md:py-24">
-          <div className="max-w-xl fade-up fade-up-1">
-            <h2 className="text-xs md:text-sm font-semibold tracking-[0.32em] uppercase text-apex-gold/90">
-              Services
-            </h2>
-            <h3 className="mt-3 text-2xl md:text-3xl font-bold">
-              Mental performance coaching for every level.
-            </h3>
-          </div>
-
-          <div className="mt-10 grid gap-8 md:grid-cols-3">
-            <div className="apex-card fade-up fade-up-2">
-              <h4 className="text-sm font-semibold tracking-[0.18em] uppercase">
-                1-on-1 Athletes
-              </h4>
-              <p className="mt-3 text-sm text-white/80">
-                Individual sessions tailored to your specific sport, role and
-                performance goals.
-              </p>
-            </div>
-            <div className="apex-card fade-up fade-up-3">
-              <h4 className="text-sm font-semibold tracking-[0.18em] uppercase">
-                Teams &amp; Coaches
-              </h4>
-              <p className="mt-3 text-sm text-white/80">
-                Group workshops and coach support to build communication,
-                cohesion and culture.
-              </p>
-            </div>
-            <div className="apex-card fade-up fade-up-4">
-              <h4 className="text-sm font-semibold tracking-[0.18em] uppercase">
-                Workshops &amp; Clinics
-              </h4>
-              <p className="mt-3 text-sm text-white/80">
-                Custom talks and multi-session programs for clubs, schools and
-                academies.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* PLANS */}
-      <section id="plans" className="bg-[#101010] text-white">
-        <div className="container py-16 md:py-24">
-          <div className="max-w-xl fade-up fade-up-1">
-            <h2 className="text-xs md:text-sm font-semibold tracking-[0.32em] uppercase text-apex-gold/90">
-              Plans
-            </h2>
-            <h3 className="mt-3 text-2xl md:text-3xl font-bold">
-              Flexible options to fit your season.
-            </h3>
-          </div>
-
-          <div className="mt-10 grid gap-8 md:grid-cols-3">
-            <div className="apex-plan fade-up fade-up-2">
-              <h4 className="text-sm font-semibold tracking-[0.18em] uppercase">
-                Single Session
-              </h4>
-              <p className="mt-3 text-sm text-white/80">
-                Ideal for a specific competition, challenge or performance
-                moment.
-              </p>
-            </div>
-            <div className="apex-plan apex-plan-featured fade-up fade-up-3">
-              <h4 className="text-sm font-semibold tracking-[0.18em] uppercase">
-                Monthly Package
-              </h4>
-              <p className="mt-3 text-sm text-white/85">
-                Ongoing support across training cycles, competitions and
-                recovery.
-              </p>
-            </div>
-            <div className="apex-plan fade-up fade-up-4">
-              <h4 className="text-sm font-semibold tracking-[0.18em] uppercase">
-                Team Program
-              </h4>
-              <p className="mt-3 text-sm text-white/80">
-                Season-long programs with workshops, coach consults and player
-                check-ins.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ONLINE PROGRAMS */}
-      <section id="online-programs" className="bg-black text-white">
-        <div className="container py-16 md:py-24">
-          <div className="grid gap-10 md:grid-cols-2 items-center">
-            <div className="fade-up fade-up-1">
-              <h2 className="text-xs md:text-sm font-semibold tracking-[0.32em] uppercase text-apex-gold/90">
-                Online Programs
-              </h2>
-              <h3 className="mt-3 text-2xl md:text-3xl font-bold">
-                Train your mindset from anywhere.
-              </h3>
-              <p className="mt-5 text-sm md:text-base text-white/80">
-                Access structured video lessons, guided exercises and practice
-                tools through our online platform. Work at your own pace while
-                still having the option to book live sessions for additional
-                support.
-              </p>
-            </div>
-            <div className="fade-up fade-up-2 relative h-[260px] md:h-[320px] rounded-2xl overflow-hidden apex-img-zoom">
-              <Image
-                src="https://images.unsplash.com/photo-1518458028785-8fbcd101ebb9?auto=format&fit=crop&w=1200&q=80"
-                alt="Athlete with headphones training"
-                className="h-full w-full object-cover"
-                fill
-                priority
-                sizes="(max-width: 768px) 100vw, 1600px"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CONTACT / BOOKING */}
-      <section id="contact" className="bg-[#111111] text-white">
-        <div className="container py-16 md:py-24">
-          <div className="grid gap-12 md:grid-cols-2">
-            <div className="fade-up fade-up-1">
-              <h2 className="text-xs md:text-sm font-semibold tracking-[0.32em] uppercase text-apex-gold/90">
-                Contact
-              </h2>
-              <h3 className="mt-3 text-2xl md:text-3xl font-bold">
-                Ready to get started?
-              </h3>
-              <p className="mt-5 text-sm md:text-base text-white/80">
-                Share a bit about yourself, your sport and what you&apos;re
-                working toward. We&apos;ll get back to you with session options
-                and next steps.
-              </p>
-
-              <div className="mt-6 space-y-2 text-sm text-white/80">
-                <p>Email: info@apexsportpsychology.com</p>
-                <p>Phone: (555) 123-4567</p>
-                <p>Location: In-person and virtual sessions available</p>
-              </div>
-            </div>
-
-            <form className="fade-up fade-up-2 space-y-4">
-              <div>
-                <label className="block text-xs font-semibold tracking-[0.16em] uppercase mb-1">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  className="w-full rounded-lg border border-white/15 bg-black/40 px-3 py-2 text-sm text-white outline-none focus:border-apex-gold/80 transition-colors"
-                />
-              </div>
-              <div>
-                <label className="block text-xs font-semibold tracking-[0.16em] uppercase mb-1">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  className="w-full rounded-lg border border-white/15 bg-black/40 px-3 py-2 text-sm text-white outline-none focus:border-apex-gold/80 transition-colors"
-                />
-              </div>
-              <div>
-                <label className="block text-xs font-semibold tracking-[0.16em] uppercase mb-1">
-                  Message
-                </label>
-                <textarea
-                  rows={4}
-                  className="w-full rounded-lg border border-white/15 bg-black/40 px-3 py-2 text-sm text-white outline-none focus:border-apex-gold/80 transition-colors"
-                />
-              </div>
-              <button
-                type="submit"
-                className="inline-flex items-center rounded-full bg-apex-gold px-7 py-3 text-xs md:text-sm font-semibold tracking-[0.18em] uppercase text-black shadow-md hover:bg-[#ffd15c] transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-xl"
-              >
-                Send Message
-              </button>
-            </form>
+      {/* CTA Section */}
+      <section className="section bg-gradient-lime text-black">
+        <div className="container text-center">
+          <h2 className="text-heading-1 mb-6">
+            Ready to Elevate Your Performance?
+          </h2>
+          <p className="text-lg mb-8 max-w-2xl mx-auto opacity-90">
+            Join hundreds of athletes who have transformed their game with CORE
+            ATHLETE training programs. Book your session today.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Link
+              href="/contact"
+              className="px-8 py-4 bg-black text-lime-400 rounded-full font-semibold uppercase tracking-wide hover:bg-slate-900 transition-all transform hover:scale-105"
+            >
+              Get Started Today
+            </Link>
+            <Link
+              href="/programs"
+              className="px-8 py-4 bg-white text-black rounded-full font-semibold uppercase tracking-wide hover:bg-slate-100 transition-all transform hover:scale-105"
+            >
+              View All Programs
+            </Link>
           </div>
         </div>
       </section>

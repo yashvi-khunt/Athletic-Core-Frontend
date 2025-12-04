@@ -1,34 +1,40 @@
 import { ReactNode } from "react";
 import type { Section as SectionType } from "../types/site";
-import Card from "./ProgramCard";
+import ProgramCard from "./ProgramCard";
 
 export default function Section({
   section,
   children,
+  className = "",
 }: {
   section: SectionType;
   children?: ReactNode;
+  className?: string;
 }) {
   const hasItems = section.items && section.items.length > 0;
 
   return (
-    <section id={section.id} className="py-8">
+    <section id={section.id} className={`section ${className}`}>
       <div className="container">
-        <h2
-          className="section-title"
-          style={{ color: "var(--color-text-primary)" }}
-        >
-          {section.title}
-        </h2>
-        {section.description && (
-          <p className="mt-2 muted">{section.description}</p>
-        )}
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <h2 className="text-heading-2 text-slate-900 mb-4">
+            {section.title}
+          </h2>
+          {section.description && (
+            <p className="text-lg text-slate-600 leading-relaxed">
+              {section.description}
+            </p>
+          )}
+        </div>
+
+        {/* Section Content */}
         {children ? (
-          <div className="mt-6">{children}</div>
+          <div>{children}</div>
         ) : hasItems ? (
-          <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {section.items?.map((it) => (
-              <Card key={it.name} item={it} />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            {section.items?.map((item) => (
+              <ProgramCard key={item.name} item={item} />
             ))}
           </div>
         ) : null}

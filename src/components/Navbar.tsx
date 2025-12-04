@@ -1,116 +1,120 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 
-const navLinks = [
-  { label: "ABOUT", href: "/#about" },
-  { label: "SERVICES", href: "/#services" },
-  { label: "PLANS", href: "/#plans" },
-  { label: "ONLINE PROGRAMS", href: "/#online-programs" },
-  { label: "CONTACT", href: "/#contact" },
-];
-
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const navLinks = [
+    { href: "/programs", label: "Programs" },
+    { href: "/about", label: "About" },
+    { href: "/contact", label: "Contact" },
+  ];
 
   return (
-    <header className="site-header apex-header">
+    <header className={`site-header ${isScrolled ? "scrolled" : ""}`}>
       <div className="container">
-        <div className="flex items-center justify-between py-3 md:py-4">
-          {/* LEFT: Logo / Brand */}
-          <Link
-            href="/"
-            className="apex-logo flex items-center gap-3 hover:opacity-90 transition-opacity"
-          >
-            <div className="flex flex-col leading-none uppercase tracking-[0.28em]">
-              <span className="text-xs md:text-sm font-bold">APEX</span>
-              <span className="text-xs md:text-sm font-bold mt-[2px]">
-                SPORTS
+        <nav className="flex items-center justify-between h-20">
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-3 group">
+            <div className="relative w-12 h-12 flex items-center justify-center">
+              {/* You can replace this with your actual logo */}
+              <div className="w-10 h-10 bg-lime-400 rounded-lg flex items-center justify-center font-black text-xl text-black transform group-hover:scale-110 transition-transform">
+                C
+              </div>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-xl font-black tracking-tight leading-none">
+                <span className="text-lime-400">CORE</span>
+                <span className="text-slate-900"> ATHLETE</span>
               </span>
-              <span className="text-xs md:text-sm font-bold mt-[2px]">
-                PSYCHOLOGY
+              <span className="text-[0.6rem] text-slate-500 font-medium tracking-widest uppercase">
+                Training & Performance
               </span>
             </div>
-            <span className="apex-logo-diamond" aria-hidden="true" />
           </Link>
 
-          {/* DESKTOP NAV */}
-          <nav className="hidden md:flex items-center gap-10">
-            <ul className="flex items-center gap-8 text-[0.8rem] tracking-[0.28em] font-semibold uppercase">
-              {navLinks.map((item) => (
-                <li key={item.label}>
-                  <Link href={item.href} className="apex-nav-link inline-block">
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-
-            {/* Log In – icon + text */}
-            <Link
-              href="/login"
-              className="apex-login flex items-center gap-3 ml-3"
-            >
-              <span className="apex-login-avatar">
-                {/* simple user icon */}
-                <svg viewBox="0 0 24 24" className="w-4 h-4" aria-hidden="true">
-                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-3.31 0-6 2.02-6 4.5V20h12v-1.5C18 16.02 15.31 14 12 14z" />
-                </svg>
-              </span>
-              <span className="apex-login-text">Log In</span>
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-sm font-semibold uppercase tracking-wide text-slate-700 hover:text-lime-400 transition-colors"
+              >
+                {link.label}
+              </Link>
+            ))}
+            <Link href="/book" className="btn btn-primary text-sm">
+              Book Session
             </Link>
-          </nav>
+          </div>
 
-          {/* MOBILE: Menu button */}
+          {/* Mobile Menu Button */}
           <button
-            type="button"
-            className="md:hidden inline-flex items-center rounded-full border border-white/60 px-4 py-2 text-[0.65rem] font-semibold tracking-[0.22em] uppercase text-white"
-            onClick={() => setIsOpen((v) => !v)}
-            aria-expanded={isOpen}
-            aria-label="Toggle navigation"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden p-2 text-slate-700 hover:text-lime-400 transition-colors"
+            aria-label="Toggle menu"
           >
-            {isOpen ? "Close" : "Menu"}
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              {isMobileMenuOpen ? (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              ) : (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              )}
+            </svg>
           </button>
-        </div>
+        </nav>
 
-        {/* MOBILE: dropdown */}
-        {isOpen && (
-          <nav className="md:hidden pb-3">
-            <div className="mt-2 rounded-2xl bg-black/90 px-5 py-4">
-              <ul className="flex flex-col gap-3 text-[0.78rem] tracking-[0.22em] font-semibold uppercase">
-                {navLinks.map((item) => (
-                  <li key={item.label}>
-                    <Link
-                      href={item.href}
-                      className="block py-1"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-                <li className="pt-2">
-                  <Link
-                    href="/login"
-                    className="flex items-center gap-3"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <span className="apex-login-avatar">
-                      <svg
-                        viewBox="0 0 24 24"
-                        className="w-4 h-4"
-                        aria-hidden="true"
-                      >
-                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-3.31 0-6 2.02-6 4.5V20h12v-1.5C18 16.02 15.31 14 12 14z" />
-                      </svg>
-                    </span>
-                    <span className="apex-login-text">Log In</span>
-                  </Link>
-                </li>
-              </ul>
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden py-4 border-t border-slate-200 animate-fade-in">
+            <div className="flex flex-col gap-4">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-sm font-semibold uppercase tracking-wide text-slate-700 hover:text-lime-400 transition-colors py-2"
+                >
+                  {link.label}
+                </Link>
+              ))}
+              <Link
+                href="/book"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="btn btn-primary text-sm w-full text-center"
+              >
+                Book Session
+              </Link>
             </div>
-          </nav>
+          </div>
         )}
       </div>
     </header>
